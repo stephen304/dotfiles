@@ -89,3 +89,16 @@ super + space
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
+
+#
+# Custom things
+#
+
+super + F8
+	amixer set Master toggle && amixer set Speaker unmute
+
+super + F9
+	amixer set Master 2%-
+
+super + F10
+	amixer set Master 2%+
