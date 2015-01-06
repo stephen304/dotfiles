@@ -10,7 +10,7 @@ bspc config borderless_monocle  true
 bspc config gapless_monocle     true
 bspc config focus_by_distance   true
 
-bspc monitor -d I II III IV
+bspc monitor -d Web Code Term Misc
 
 bspc rule -a Gimp desktop=^8 follow=on floating=on
 bspc rule -a Chromium desktop=^2
