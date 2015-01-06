@@ -10,7 +10,7 @@ draw_graph_borders no
 draw_outline no
 draw_shades no
 use_xft yes
-xftfont Nu:size=10
+xftfont Nu:size=8
 #gap_x 240
 gap_y 750
 minimum_size 5 5
