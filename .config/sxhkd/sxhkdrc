@@ -94,6 +94,12 @@ super + Escape
 # Custom things
 #
 
+super + F6
+	xbacklight -dec 10
+
+super + F7
+	xbacklight -inc 10
+
 super + F8
 	amixer set Master toggle && amixer set Speaker unmute
 
