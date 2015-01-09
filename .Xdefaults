@@ -1,0 +1,44 @@
+!------------------------------------------------------------------------------
+! c o l o r -  s e t t i n g s
+
+URxvt*foreground: #989892
+
+! 0: black
+URxvt*color0: #484848
+URxvt*color8: #484848
+! 1: red
+URxvt*color1: #e45555
+URxvt*color9: #e45555
+! 2: green
+URxvt*color2: #7bdd45
+URxvt*color10: #7bdd45
+! 3: yellow
+URxvt*color3: #fddc26
+URxvt*color11: #fddc26
+! 4: blue
+URxvt*color4: #4585dd
+URxvt*color12: #4585dd
+! 5: magenta
+!URxvt*color5: #c95bf7
+!URxvt*color13: #c95bf7
+! 6: cyan
+URxvt*color6: #5bbaf7
+URxvt*color14: #5bbaf7
+! 7: white
+URxvt*color7: #b6aaaa
+URxvt*color15: #b6aaaa
+
+
+!------------------------------------------------------------------------------
+! u r x v t
+
+URxvt*geometry:         112x22
+URxvt*font:             xft:terminus:size=10
+URxvt*urlLauncher:      firefox
+URxvt*scrollBar:        false
+URxvt*scrollBar_right:  true
+URxvt*scrollColor:      #000000
+URxvt.cursorColor:      #fe8839
+
+URxvt.depth: 32
+URxvt.background: [100]#1E1E1E
