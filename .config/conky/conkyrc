@@ -45,4 +45,4 @@ ${goto 575}${font}DN ${downspeedgraph wlp1s0 10,150 504339 9a875f -t -l} ${downs
       \
 ${goto 862}${font}BATT ${battery_bar 10,150} ${battery_percent}%\
       \
-$alignr${font}${wireless_essid wlp1s0} ${wireless_link_bar 10,150 wlp1s0} ${wireless_link_qual_perc wlp1s0}%   \
+$alignr${font}WIFI ${wireless_link_bar 10,150 wlp1s0} ${wireless_link_qual_perc wlp1s0}%   \
