@@ -39,8 +39,19 @@ while read -r line ; do
       ;;
     B*)
       # battery output
-      batt="%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} ${line#?} %{B-}%{F-}"
-      batt="%{F$COLOR_ICON}${ICON_PWR}%{F-}${batt}"
+      if ((${line#?} > 50))
+        then
+        battcon="%{F$COLOR_ICON}${ICON_PWR}%{F-}"
+      else
+        if ((${line#?} > 20))
+          then
+          battcon="%{F$COLOR_WARN}${ICON_PWR}%{F-}"
+        else
+          battcon="%{F$COLOR_ERR}${ICON_PWR}%{F-}"
+        fi
+      fi
+      batt="%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} ${line#?}% %{B-}%{F-}"
+      batt="${battcon}${batt}"
       ;;
     T*)
       # xtitle output
