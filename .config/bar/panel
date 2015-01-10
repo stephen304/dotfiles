@@ -17,6 +17,7 @@ clock -sf 'C%a %b %-d' > "$PANEL_FIFO" &
 clock -sf 'S%-I:%M %p' > "$PANEL_FIFO" &
 essid -s -i 1 -f 'E%s' -w wlp1s0 > "$PANEL_FIFO" &
 while true; do acpi -b | grep -Eo "[0-9]+%" | sed -e 's/^/B/'; sleep 1; done > "$PANEL_FIFO" &
+while true; do echo "100 *" $(iwconfig | grep -Eo "Link Quality=([0-9]+/[0-9]+)" | grep -Eo "[0-9]+/[0-9]+") | bc | sed -e 's/^/F/'; sleep 1; done > "$PANEL_FIFO" &
 
 . panel_vars
 

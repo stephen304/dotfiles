@@ -20,8 +20,21 @@ while read -r line ; do
       ;;
     E*)
       # ssid output
-      ssid="%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} ${line#?} %{B-}%{F-}"
-      ssid="%{F$COLOR_ICON}${ICON_WIFI}%{F-}${ssid}"
+      wifi="%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} ${line#?} %{B-}%{F-}"
+      wifi="${wificon}${wifi}"
+      ;;
+    F*)
+      # wifi signal
+      if ((${line#?} > 95))
+      then
+        wificon="%{F$COLOR_ICON}${ICON_WIFI}%{F-}"
+      else
+        if ((${line#?} > 85))
+        then
+          wificon="%{F$COLOR_WARN}${ICON_WIFI}%{F-}"
+        else
+          wificon="%{F$COLOR_ERR}${ICON_WIFI}%{F-}"
+      fi
       ;;
     B*)
       # battery output
@@ -86,5 +99,5 @@ while read -r line ; do
       done
       ;;
   esac
-  printf "%s\n" "%{l}${wm_infos}%{c}${title}%{r}${batt}// ${ssid}// ${cal}// ${clock}"
+  printf "%s\n" "%{l}${wm_infos}%{c}${title}%{r}${batt}// ${wifi}// ${cal}// ${clock}"
 done
