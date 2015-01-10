@@ -2,7 +2,7 @@
 #
 # Example panel for LemonBoy's bar
 
-. panel_colors
+. panel_vars
 
 num_mon=$(bspc query -M | wc -l)
 
@@ -11,14 +11,22 @@ while read -r line ; do
     S*)
       # clock output
       clock="%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} ${line#?} %{B-}%{F-}"
+      clock="%{F$COLOR_ICON}${ICON_CLOCK}%{F-}${clock}"
       ;;
     C*)
       # calendar output
       cal="%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} ${line#?} %{B-}%{F-}"
-    ;;
+      cal="%{F$COLOR_ICON}${ICON_CAL}%{F-}${cal}"
+      ;;
     E*)
       # ssid output
       ssid="%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} ${line#?} %{B-}%{F-}"
+      ssid="%{F$COLOR_ICON}${ICON_WIFI}%{F-}${ssid}"
+      ;;
+    B*)
+      # battery output
+      batt="%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} ${line#?} %{B-}%{F-}"
+      batt="%{F$COLOR_ICON}${ICON_PWR}%{F-}${batt}"
       ;;
     T*)
       # xtitle output
@@ -78,5 +86,5 @@ while read -r line ; do
       done
       ;;
   esac
-  printf "%s\n" "%{l}${wm_infos}%{c}${title}%{r}%{F$COLOR_ICON}%{F-}${ssid}// %{F$COLOR_ICON}%{F-}${cal}// %{F$COLOR_ICON}%{F-}${clock}"
+  printf "%s\n" "%{l}${wm_infos}%{c}${title}%{r}${batt}// ${ssid}// ${cal}// ${clock}"
 done
