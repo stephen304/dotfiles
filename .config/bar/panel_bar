@@ -34,6 +34,7 @@ while read -r line ; do
           wificon="%{F$COLOR_WARN}${ICON_WIFI}%{F-}"
         else
           wificon="%{F$COLOR_ERR}${ICON_WIFI}%{F-}"
+        fi
       fi
       ;;
     B*)
