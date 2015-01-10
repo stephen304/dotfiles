@@ -12,6 +12,10 @@ while read -r line ; do
       # clock output
       clock="%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} ${line#?} %{B-}%{F-}"
       ;;
+    C*)
+      # calendar output
+      cal="%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} ${line#?} %{B-}%{F-}"
+    ;;
     E*)
       # ssid output
       ssid="%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} ${line#?} %{B-}%{F-}"
@@ -74,5 +78,5 @@ while read -r line ; do
       done
       ;;
   esac
-  printf "%s\n" "%{l}${wm_infos}%{c}${title}%{r}${ssid}${clock}"
+  printf "%s\n" "%{l}${wm_infos}%{c}${title}%{r}%{F$COLOR_ICON}%{F-}${ssid}// %{F$COLOR_ICON}%{F-}${cal}// %{F$COLOR_ICON}%{F-}${clock}"
 done
