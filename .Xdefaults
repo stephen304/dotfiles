@@ -32,6 +32,10 @@ URxvt*color15: #b6aaaa
 !------------------------------------------------------------------------------
 ! u r x v t
 
+URxvt*iso14755 :        false
+URxvt*perl-ext-common:  default,clipboard
+URxvt*keysym.Shift-Control-V: perl:clipboard:paste
+URxvt*keysym.Shift-Control-C: perl:clipboard:copy
 URxvt*geometry:         112x22
 URxvt*font:             xft:terminus:size=10
 URxvt*urlLauncher:      firefox
