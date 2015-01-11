@@ -21,6 +21,6 @@ while true; do echo "100 *" $(iwconfig | grep -Eo "Link Quality=([0-9]+/[0-9]+)"
 
 . panel_vars
 
-cat "$PANEL_FIFO" | panel_bar | bar -g x$PANEL_HEIGHT -f "$FONT_FONT","$ICON_FONT" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" &
+cat "$PANEL_FIFO" | panel_bar | bar-aint-recursive -g x$PANEL_HEIGHT -f "$FONT_FONT","$ICON_FONT" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" &
 
 wait
