@@ -25,11 +25,11 @@ while read -r line ; do
       ;;
     F*)
       # wifi signal
-      if ((${line#?} > 95))
+      if ((${line#?} > 90))
       then
         wificon="%{F$COLOR_ICON}${ICON_WIFI}%{F-}"
       else
-        if ((${line#?} > 85))
+        if ((${line#?} > 80))
         then
           wificon="%{F$COLOR_WARN}${ICON_WIFI}%{F-}"
         else
