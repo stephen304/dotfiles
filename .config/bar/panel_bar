@@ -53,6 +53,22 @@ while read -r line ; do
       batt="%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} ${line#?}% %{B-}%{F-}"
       batt="${battcon}${batt}"
       ;;
+    R*)
+      # ram stats
+      if ((${line#?} < 25))
+        then
+        ramcon="%{F$COLOR_ICON}${ICON_DB}%{F-}"
+      else
+        if ((${line#?} > 70))
+          then
+          ramcon="%{F$COLOR_WARN}${ICON_DB}%{F-}"
+        else
+          ramcon="%{F$COLOR_ERR}${ICON_DB}%{F-}"
+        fi
+      fi
+      ram="%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} ${line#?}% %{B-}%{F-}"
+      ram="${ramcon}${ram}"
+      ;;
     T*)
       # xtitle output
       title="%{F$COLOR_TITLE_FG}%{B$COLOR_TITLE_BG} ${line#?} %{B-}%{F-}"
@@ -111,5 +127,5 @@ while read -r line ; do
       done
       ;;
   esac
-  printf "%s\n" "%{l}${wm_infos}%{c}${title}%{r}${batt}// ${wifi}// ${cal}// ${clock}"
+  printf "%s\n" "%{l}${wm_infos}%{c}${title}%{r}${ram}// ${batt}// ${wifi}// ${cal}// ${clock}"
 done
