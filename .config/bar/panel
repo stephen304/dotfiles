@@ -19,9 +19,10 @@ essid -s -i 1 -f 'E%s' -w wlp1s0 > "$PANEL_FIFO" &
 while true; do acpi -b | grep -Eo "[0-9]+%" | sed -e 's/^/B/' | sed -e 's/.$//'; sleep 1; done > "$PANEL_FIFO" &
 while true; do echo "100 *" $(iwconfig | grep -Eo "Link Quality=([0-9]+/[0-9]+)" | grep -Eo "[0-9]+/[0-9]+") | bc | sed -e 's/^/F/'; sleep 1; done > "$PANEL_FIFO" &
 while true; do free | grep -Eo "Mem:(\s)*[0-9]+(\s)+[0-9]+" | grep -Eo "[0-9]+(\s)+[0-9]+" | sed -e "s/\s\+/ * /" | sed -e "s/^/100 \/ /" | bc -l | sed -e "s/$/ \/ 1/" | bc | sed -e 's/^/R/'; sleep 1; done > "$PANEL_FIFO" &
+# ip link | grep -m 1 link/ether | grep -Eo ([0-9a-f]{2}:){5}[0-9a-f]{2} | head -n 1
 
 . panel_vars
 
-cat "$PANEL_FIFO" | panel_bar | bar-aint-recursive -g x$PANEL_HEIGHT -f "$FONT_FONT","$ICON_FONT" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" &
+cat "$PANEL_FIFO" | panel_bar | bar-aint-recursive -g x$PANEL_HEIGHT -f "$FONT_FONT","$ICON_FONT" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" | while read line; do eval "$line"; done &
 
 wait
