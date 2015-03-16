@@ -23,6 +23,6 @@ while true; do free | grep -Eo "Mem:(\s)*[0-9]+(\s)+[0-9]+" | grep -Eo "[0-9]+(\
 
 . panel_vars
 
-cat "$PANEL_FIFO" | panel_bar | bar-aint-recursive -g x$PANEL_HEIGHT -f "$FONT_FONT","$ICON_FONT" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" | while read line; do eval "$line"; done &
+cat "$PANEL_FIFO" | panel_bar | lemonbar -g x$PANEL_HEIGHT -f "$FONT_FONT","$ICON_FONT" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" | while read line; do eval "$line"; done &
 
 wait
