@@ -1,0 +1,3 @@
+for ns in $(dig +short $1 ns); do 
+    dig @$ns $1 any;
+done
