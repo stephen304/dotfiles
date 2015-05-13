@@ -73,6 +73,10 @@ while read -r line ; do
       # xtitle output
       title="%{F$COLOR_TITLE_FG}%{B$COLOR_TITLE_BG} ${line#?} %{B-}%{F-}"
       ;;
+    M*)
+      #Music
+      music="%{F$COLOR_ICON} %{A:mpc next:}<<%{A} %{A:mpc toggle:}${line#?}%{A} %{A:mpc prev:}>>%{A} %{F-}"
+      ;;
     W*)
       # bspwm internal state
       wm_infos=""
@@ -127,5 +131,5 @@ while read -r line ; do
       done
       ;;
   esac
-  printf "%s\n" "%{l}${wm_infos}%{c}${title}%{r}${ram}// ${batt}// ${wifi}// ${cal}// ${clock}"
+  printf "%s\n" "%{l}${wm_infos}${music}%{c}${title}%{r}${ram}// ${batt}// ${wifi}// ${cal}// ${clock}"
 done

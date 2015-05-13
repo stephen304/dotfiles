@@ -34,8 +34,8 @@ super + y
 super + m
 	bspc window -s biggest
 
-super + {_,shift + }{Left,Down,Up,Right}
-	bspc window -{f,s} {left,down,up,right}
+super + shift + {Left,Down,Up,Right}
+	bspc window -s {left,down,up,right}
 
 super + {_,shift + }c
 	bspc window -f {next,prev}
@@ -76,6 +76,9 @@ super + !button{1-3}
 super + @button{1-3}
 	bspc pointer -u
 
+super + {minus,equal}
+    bspc config -d focused window_gap $((`bspc config -d focused window_gap` {+,-} 5 ))
+
 #
 # wm independent hotkeys
 #
@@ -108,3 +111,12 @@ super + F9
 
 super + F10
 	amixer set Master 2%+
+
+alt + Up
+	xte 'key Page_Up'
+
+alt + Down
+	xte 'key Page_Down'
+
+super + l
+   ~/.config/xautolock/lock.sh
