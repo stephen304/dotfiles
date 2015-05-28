@@ -104,7 +104,7 @@ super + F7
 	xbacklight -inc 10
 
 super + F8
-	amixer set Master toggle && amixer set Speaker unmute
+	amixer set Master toggle && amixer set Speaker unmute && amixer set Headphone unmute
 
 super + F9
 	amixer set Master 2%-

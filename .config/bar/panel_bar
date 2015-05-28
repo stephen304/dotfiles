@@ -75,7 +75,7 @@ while read -r line ; do
       ;;
     M*)
       #Music
-      music="%{F$COLOR_ICON} %{A:mpc next:}<<%{A} %{A:mpc toggle:}${line#?}%{A} %{A:mpc prev:}>>%{A} %{F-}"
+      music="%{F$COLOR_ICON} %{A:mpc next:}$ICON_PREV%{A} %{A:mpc toggle:}$ICON_PAUSE%{A} %{A:mpc prev:}$ICON_NEXT%{A} %{A:mpc toggle:}${line#?}%{A} %{F-}"
       ;;
     W*)
       # bspwm internal state
@@ -124,7 +124,7 @@ while read -r line ; do
             ;;
           L*)
             # layout
-            wm_infos="$wm_infos  %{F$COLOR_LAYOUT_FG}%{B$COLOR_LAYOUT_BG} ${name} %{B-}%{F-}"
+            wm_infos="$wm_infos %{F$COLOR_LAYOUT_FG}%{B$COLOR_LAYOUT_BG}${name} %{B-}%{F-}"
             ;;
         esac
         shift

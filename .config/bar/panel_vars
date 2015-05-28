@@ -11,6 +11,10 @@ ICON_WIFI=''
 ICON_PWR=''
 ICON_DB=''
 ICON_SQUARE=''
+ICON_PREV=''
+ICON_PAUSE=''
+ICON_PLAY=''
+ICON_NEXT=''
 
 # Colors
 
