@@ -7,3 +7,4 @@ ctl.!default {
     type hw
     card 1
 }
+defaults.pcm.rate_converter "speexrate_medium"
