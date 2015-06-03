@@ -24,6 +24,6 @@ while true; do  mpc | head -n 1 | grep -Eo "\- (.*)" | cut -c 3- | sed -e 's/^/M
 
 . panel_vars
 
-cat "$PANEL_FIFO" | panel_bar | lemonbar -g x$PANEL_HEIGHT -f "$FONT_FONT","$ICON_FONT" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" | while read line; do eval "$line"; done &
+cat "$PANEL_FIFO" | panel_bar | lemonbar -g x$PANEL_HEIGHT -f "$FONT_FONT" -f "$ICON_FONT" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" | while read line; do eval "$line"; done &
 
 wait
