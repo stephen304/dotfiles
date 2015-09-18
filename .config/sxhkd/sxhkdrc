@@ -97,6 +97,15 @@ super + Escape
 # Custom things
 #
 
+super + F1
+	mpc prev
+
+super + F2
+	mpc next
+
+super + F3
+	mpc toggle
+
 super + F6
 	xbacklight -dec 10
 
