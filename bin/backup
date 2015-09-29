@@ -1,0 +1,1 @@
+rsync --delete --info=progress2 -ae ssh /home neptune:~/jupiter
