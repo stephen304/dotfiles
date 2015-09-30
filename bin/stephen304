@@ -13,10 +13,10 @@ function sub_default(){
 export -f sub_default
 
 function sub_backup(){
-    echo "==> Backing up home directory..."
-    echo -n "  -> "
+    echo -e "\e[1m\e[32m==>\e[0m Backing up home directory..."
+    echo -ne "  \e[1m\e[34m->\e[0m "
     rsync --delete --info=progress2 -ae ssh /home neptune:~/jupiter
-    echo "==> Backup Complete!"
+    echo -e "\e[1m\e[32m==>\e[0m Backup Complete!"
 }
 export -f sub_backup
 
