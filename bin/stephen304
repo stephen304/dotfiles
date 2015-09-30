@@ -1,1 +1,23 @@
-rsync --delete --info=progress2 -ae ssh /home neptune:~/jupiter
+#!/bin/bash
+
+function sub_default(){
+    echo "Usage: $progname <subcommand> [options]\n"
+    echo "Subcommands:"
+    echo "    bar   Do bar"
+    echo "    baz   Run baz"
+    echo ""
+    echo "For help with each subcommand run:"
+    echo "$progname <subcommand> -h|--help"
+    echo ""
+}
+export -f sub_default
+
+function sub_backup(){
+    echo "==> Backing up home directory..."
+    echo -n "  -> "
+    rsync --delete --info=progress2 -ae ssh /home neptune:~/jupiter
+    echo "==> Backup Complete!"
+}
+export -f sub_backup
+
+./lib/runsub "$@"
