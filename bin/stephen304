@@ -20,4 +20,4 @@ function sub_backup(){
 }
 export -f sub_backup
 
-./lib/runsub "$@"
+. "`dirname $0`"/lib/runsub "$@"
