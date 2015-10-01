@@ -1,6 +1,6 @@
 #!/bin/bash
 
-progname=$(ps -o comm= $PPID)
+progname=$(basename $0)
 subcommand=$1
 
 case $subcommand in
