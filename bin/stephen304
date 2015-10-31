@@ -14,10 +14,17 @@ export -f sub_default
 
 function sub_backup(){
     echo -e "\e[1m\e[32m==>\e[0m Backing up home directory..."
-    echo -ne "  \e[1m\e[34m->\e[0m "
+    echo -e "  \e[1m\e[34m->\e[0m "
     rsync --delete --info=progress2 -ae ssh /home neptune:~/jupiter
     echo -e "\e[1m\e[32m==>\e[0m Backup Complete!"
 }
 export -f sub_backup
+
+function sub_restore(){
+    echo -e "\e[1m\e[32m==>\e[0m Restoring home directory..."
+    echo -e "  \e[1m\e[34m->\e[0m "
+    rsync --info=progress2 -ae ssh neptune:~/jupiter/home /
+    echo -e "\e[1m\e[32m==>\e[0m Restore Complete!"
+}
 
 . "`dirname $0`"/lib/runsub "$@"
