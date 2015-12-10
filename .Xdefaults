@@ -45,4 +45,4 @@ URxvt*scrollColor:      #000000
 URxvt.cursorColor:      #fe8839
 
 URxvt.depth: 32
-URxvt.background: [100]#1E1E1E
+URxvt.background: [90]#1E1E1E
