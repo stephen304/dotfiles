@@ -37,21 +37,45 @@ while read -r line ; do
         fi
       fi
       ;;
+    A*)
+      # battery charging/discharging
+      charging=${line#?}
+      ;;
     B*)
       # battery output
-      if ((${line#?} > 50))
+      if ((${line#?} > 80))
         then
-        battcon="%{F$COLOR_ICON}${ICON_PWR}%{F-}"
+        battcol="$COLOR_ICON"
+        battcon="$ICON_BATT_4"
       else
-        if ((${line#?} > 20))
+        if ((${line#?} > 60))
           then
-          battcon="%{F$COLOR_WARN}${ICON_PWR}%{F-}"
+          battcol="$COLOR_ICON"
+          battcon="$ICON_BATT_3"
         else
-          battcon="%{F$COLOR_ERR}${ICON_PWR}%{F-}"
+          if ((${line#?} > 40))
+            then
+            battcol="$COLOR_WARN"
+            battcon="$ICON_BATT_2"
+          else
+            if ((${line#?} > 20))
+              then
+              battcol="$COLOR_WARN"
+              battcon="$ICON_BATT_1"
+            else
+              battcol="$COLOR_ERR"
+              battcon="$ICON_BATT_0"
+            fi
+          fi
         fi
       fi
+      if [ "$charging" == "Charging" ]
+        then
+        battcol="$COLOR_SUCCESS"
+        battcon="$ICON_PLUG"
+      fi
       batt="%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} ${line#?}% %{B-}%{F-}"
-      batt="${battcon}${batt}"
+      batt="%{F${battcol}}${battcon}%{F-}${batt}"
       ;;
     R*)
       # ram stats
