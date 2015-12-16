@@ -1,0 +1,15 @@
+[user]
+	email = stephen304@gmail.com
+	name = Stephen Smith
+[push]
+	default = simple
+[credential]
+	helper = cache --timeout=900
+[color]
+	ui = auto
+[alias]
+	graph = log --graph --oneline --decorate
+[pager]
+	diff = diff-highlight | less
+	log = diff-highlight | less
+	show = diff-highlight | less
