@@ -16,11 +16,12 @@ xtitle -sf 'T%s' > "$PANEL_FIFO" &
 clock -sf 'C%a %b %-d' > "$PANEL_FIFO" &
 clock -sf 'S%-I:%M %p' > "$PANEL_FIFO" &
 essid -s -i 1 -f 'E%s' -w wlp1s0 > "$PANEL_FIFO" &
-while true; do acpi -b | grep -Eo "[0-9]+%" | sed -e 's/^/B/' | sed -e 's/.$//'; sleep 1; done > "$PANEL_FIFO" &
+while true; do acpi -b | grep -Po "\K[0-9]+(?=%)" | sed -e 's/^/B/'; sleep 1; done > "$PANEL_FIFO" &
 while true; do acpi -b | grep -Eo "(Disc|C)harging" | sed -e 's/^/A/'; sleep 1; done > "$PANEL_FIFO" &
-while true; do echo "2 * (" $(iw wlp1s0 link | grep -Eo "signal: -([0-9]+)" | grep -Eo "\-[0-9]+") " + 100)" | bc | sed -e 's/^/F/'; sleep 1; done > "$PANEL_FIFO" &
-while true; do free | grep -Eo "Mem:(\s)*[0-9]+(\s)+[0-9]+" | grep -Eo "[0-9]+(\s)+[0-9]+" | sed -e "s/\s\+/ * /" | sed -e "s/^/100 \/ /" | bc -l | sed -e "s/$/ \/ 1/" | bc | sed -e 's/^/R/'; sleep 1; done > "$PANEL_FIFO" &
+while true; do echo "2 * (" $(iw wlp1s0 link | grep -Po "signal: \K-([0-9]+)") " + 100)" | bc | sed -e 's/^/F/'; sleep 1; done > "$PANEL_FIFO" &
+while true; do free | grep -Po "Mem:(\s)*\K[0-9]+(\s)+[0-9]+" | sed -e "s/\s\+/ * /" | sed -e "s/^/100 \/ /" | bc -l | sed -e "s/$/ \/ 1/" | bc | sed -e 's/^/R/'; sleep 1; done > "$PANEL_FIFO" &
 while true; do  mpc | head -n 1 | grep -Eo "\- (.*)" | cut -c 3- | sed -e 's/^/M/'; sleep 1; done > "$PANEL_FIFO" &
+df / | grep -Po "\K[0-9]+(?=%)" &
 # ip link | grep -m 1 link/ether | grep -Eo ([0-9a-f]{2}:){5}[0-9a-f]{2} | head -n 1
 
 . panel_vars
