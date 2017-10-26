@@ -121,14 +121,5 @@ super + F9
 super + F10
 	amixer set Master 2%+
 
-alt + @Up
-	xte 'key Page_Up'
-
-alt + @Down
-	xte 'key Page_Down'
-
 super + l
    ~/.config/xautolock/lock.sh
-
-super + @BackSpace
-        xdotool key Delete
