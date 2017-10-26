@@ -37,7 +37,7 @@ URxvt*perl-ext-common:  default,clipboard
 URxvt*keysym.Shift-Control-V: perl:clipboard:paste
 URxvt*keysym.Shift-Control-C: perl:clipboard:copy
 URxvt*geometry:         112x22
-URxvt*font:             xft:terminus:size=10
+URxvt*font:             xft:xos4 Terminus:size=10
 URxvt*urlLauncher:      firefox
 URxvt*scrollBar:        false
 URxvt*scrollBar_right:  true
