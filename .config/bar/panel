@@ -15,10 +15,10 @@ bspc subscribe > "$PANEL_FIFO" &
 xtitle -sf 'T%s\n' > "$PANEL_FIFO" &
 clock -sf 'C%a %b %-d' > "$PANEL_FIFO" &
 clock -sf 'S%-I:%M %p' > "$PANEL_FIFO" &
-essid -s -i 1 -f 'E%s' -w wlp1s0 > "$PANEL_FIFO" &
+essid -s -i 1 -f 'E%s' -w wlp2s0 > "$PANEL_FIFO" &
 while true; do acpitool -b | grep -Po "\K[0-9]+(?=(\.[0-9]*%))" | sed -e 's/^/B/'; sleep 1; done > "$PANEL_FIFO" &
 while true; do acpitool -b | grep -Eo "(Disc|C)harging" | sed -e 's/^/A/'; sleep 1; done > "$PANEL_FIFO" &
-while true; do echo "2 * (" $(iw wlp1s0 link | grep -Po "signal: \K-([0-9]+)") " + 100)" | bc | sed -e 's/^/F/'; sleep 1; done > "$PANEL_FIFO" &
+while true; do echo "2 * (" $(iw wlp2s0 link | grep -Po "signal: \K-([0-9]+)") " + 100)" | bc | sed -e 's/^/F/'; sleep 1; done > "$PANEL_FIFO" &
 while true; do free | grep -Po "Mem:(\s)*\K[0-9]+(\s)+[0-9]+" | sed -e "s/\s\+/ * /" | sed -e "s/^/100 \/ /" | bc -l | sed -e "s/$/ \/ 1/" | bc | sed -e 's/^/R/'; sleep 1; done > "$PANEL_FIFO" &
 #while true; do  mpc | head -n 1 | grep -Eo "\- (.*)" | cut -c 3- | sed -e 's/^/M/'; sleep 1; done > "$PANEL_FIFO" &
 df / | grep -Po "\K[0-9]+(?=%)" &
