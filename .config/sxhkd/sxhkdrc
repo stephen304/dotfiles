@@ -106,20 +106,23 @@ super + F2
 super + F3
 	mpc toggle
 
-super + F6
-	xbacklight -dec 10
+XF86AudioMute
+	pactl set-sink-mute 0 toggle
 
-super + F7
-	xbacklight -inc 10
+XF86AudioLowerVolume
+	sh -c "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -2%"
 
-super + F8
-	amixer set Master toggle && amixer set Speaker unmute && amixer set Headphone unmute
+XF86AudioRaiseVolume
+	sh -c "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +2%"
 
-super + F9
-	amixer set Master 2%-
+XF86AudioPrev
+	playerctl previous
 
-super + F10
-	amixer set Master 2%+
+XF86AudioPlay
+	playerctl play-pause
+
+XF86AudioNext
+	playerctl next
 
 super + l
    ~/.config/xautolock/lock.sh
