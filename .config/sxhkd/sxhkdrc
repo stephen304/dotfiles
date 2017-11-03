@@ -126,13 +126,13 @@ super + F3
         mpc toggle
 
 XF86AudioMute
-        sh -c 'sink=$(pactl list sinks short | grep "RUNNING" | grep -Eo "^[0-9]+") ; pactl set-sink-mute $sink$
+        sh -c 'sink=$(pactl list sinks short | grep "RUNNING" | grep -Eo "^[0-9]+") ; pactl set-sink-mute $sink toggle'
 
 XF86AudioLowerVolume
-        sh -c 'sink=$(pactl list sinks short | grep "RUNNING" | grep -Eo "^[0-9]+") ; pactl set-sink-mute $sink$
+        sh -c 'sink=$(pactl list sinks short | grep "RUNNING" | grep -Eo "^[0-9]+") ; pactl set-sink-mute $sink false ; pactl set-sink-volume $sink -2%'
 
 XF86AudioRaiseVolume
-        sh -c 'sink=$(pactl list sinks short | grep "RUNNING" | grep -Eo "^[0-9]+") ; pactl set-sink-mute $sink$
+        sh -c 'sink=$(pactl list sinks short | grep "RUNNING" | grep -Eo "^[0-9]+") ; pactl set-sink-mute $sink false ; pactl set-sink-volume $sink +2%'
 
 XF86AudioPrev
         playerctl previous
