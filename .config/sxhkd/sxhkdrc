@@ -1,92 +1,13 @@
 #
-# bspwm hotkeys
-#
-
-super + alt + Escape
-	bspc quit
-
-super + w
-	bspc window -c
-
-super + t
-	bspc desktop -l next
-
-super + b
-	bspc desktop -B
-
-super + {s,f}
-	bspc window -t {floating,fullscreen}
-
-super + {grave,Tab}
-	bspc {window,desktop} -f last
-
-super + apostrophe
-	bspc window -s last
-
-super + {o,i}
-	bspc control --record-history off; \
-	bspc window {older,newer} -f; \
-	bspc control --record-history on
-
-super + y
-	bspc window -w last.manual
-
-super + m
-	bspc window -s biggest
-
-super + shift + {Left,Down,Up,Right}
-	bspc window -s {left,down,up,right}
-
-super + {_,shift + }c
-	bspc window -f {next,prev}
-
-super + {comma,period}
-	bspc desktop -C {backward,forward}
-
-ctrl + alt + {Left,Right}
-	bspc desktop -f {prev,next}
-
-super + ctrl + {Left,Down,Up,Right}
-	bspc window -p {left,down,up,right}
-
-super + ctrl + {_,shift + }space
-	bspc {window -p cancel,desktop -c}
-
-super + alt + {Left,Down,Up,Right}
-	bspc window -e {left -10,down +10,up -10,right +10}
-
-super + alt + shift + {Left,Down,Up,Right}
-	bspc window -e {right -10,up +10,down -10,left +10}
-
-super + ctrl + {1-9}
-	bspc window -r 0.{1-9}
-
-super + {_,shift + }{1-9,0}
-	bspc {desktop -f,window -d} ^{1-9,10}
-
-~button1
-	bspc pointer -g focus
-
-super + button{1-3}
-	bspc pointer -g {move,resize_side,resize_corner}
-
-super + !button{1-3}
-	bspc pointer -t %i %i
-
-super + @button{1-3}
-	bspc pointer -u
-
-super + {minus,equal}
-	bspc config -d focused window_gap $((`bspc config -d focused window_gap` {+,-} 5 ))
-
-#
 # wm independent hotkeys
 #
 
+# terminal emulator
 super + Return
 	urxvtc
 
-super + space
+# program launcher
+super + @space
 	dmenu_run
 
 # make sxhkd reload its configuration files:
@@ -94,35 +15,130 @@ super + Escape
 	pkill -USR1 -x sxhkd
 
 #
+# bspwm hotkeys
+#
+
+# quit bspwm normally
+super + alt + Escape
+	bspc quit
+
+# close and kill
+super + {_,shift + }w
+	bspc node -{c,k}
+
+# alternate between the tiled and monocle layout
+super + m
+	bspc desktop -l next
+
+# adjust padding
+super + {minus,equal}
+	bspc config -d focused window_gap $((`bspc config -d focused window_gap` {+,-} 5 ))
+
+#
+# state/flags
+#
+
+# set the window state
+super + {t,shift + t,s,f}
+	bspc node -t '~{tiled,pseudo_tiled,floating,fullscreen}'
+
+#
+# focus/swap
+#
+
+# focus/swap the node in the given direction
+super + {_,shift + }{Left,Down,Up,Right}
+	bspc node -{f,s} {west,south,north,east}
+
+# focus the node for the given path jump
+super + {p,b,comma,period}
+	bspc node -f @{parent,brother,first,second}
+
+# focus the next/previous node in the current desktop
+alt + {_,shift + }Tab
+	bspc node -f {next,prev}.local
+
+# focus the next/previous desktop in the current monitor
+ctrl + alt + {Left,Right}
+	bspc desktop -f {prev,next}.local
+
+# focus the last node/desktop
+super + {grave,Tab}
+	bspc {node,desktop} -f last
+
+# focus the older or newer node in the focus history
+super + {o,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+#
+# preselect
+#
+
+# preselect the direction
+super + ctrl + {Left,Down,Up,Right}
+	bspc node -p {west,south,north,east}
+
+# preselect the ratio
+super + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+# cancel the preselection for the focused node
+super + ctrl + space
+	bspc node -p cancel
+
+# cancel the preselection for the focused desktop
+super + ctrl + shift + space
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+#
+# move/resize
+#
+
+# expand a window by moving one of its side outward
+super + alt + {Left,Down,Up,Right}
+	bspc node -z {left -10 0,bottom 0 10,top 0 -10,right 10 0}
+
+# contract a window by moving one of its side inward
+super + alt + shift + {Left,Down,Up,Right}
+	bspc node -z {right -10 0,top 0 10,bottom 0 -10,left 10 0}
+
+# move a floating window
+super + {Left,Down,Up,Right}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+#
 # Custom things
 #
 
 super + F1
-	mpc prev
+        mpc prev
 
 super + F2
-	mpc next
+        mpc next
 
 super + F3
-	mpc toggle
+        mpc toggle
 
 XF86AudioMute
-	sh -c 'sink=$(pactl list sinks short | grep "RUNNING" | grep -Eo "^[0-9]+") ; pactl set-sink-mute $sink toggle'
+        sh -c 'sink=$(pactl list sinks short | grep "RUNNING" | grep -Eo "^[0-9]+") ; pactl set-sink-mute $sink$
 
 XF86AudioLowerVolume
-	sh -c 'sink=$(pactl list sinks short | grep "RUNNING" | grep -Eo "^[0-9]+") ; pactl set-sink-mute $sink false ; pactl set-sink-volume $sink -2%'
+        sh -c 'sink=$(pactl list sinks short | grep "RUNNING" | grep -Eo "^[0-9]+") ; pactl set-sink-mute $sink$
 
 XF86AudioRaiseVolume
-	sh -c 'sink=$(pactl list sinks short | grep "RUNNING" | grep -Eo "^[0-9]+") ; pactl set-sink-mute $sink false ; pactl set-sink-volume $sink +2%'
+        sh -c 'sink=$(pactl list sinks short | grep "RUNNING" | grep -Eo "^[0-9]+") ; pactl set-sink-mute $sink$
 
 XF86AudioPrev
-	playerctl previous
+        playerctl previous
 
 XF86AudioPlay
-	playerctl play-pause
+        playerctl play-pause
 
 XF86AudioNext
-	playerctl next
-
-super + l
-   ~/.config/xautolock/lock.sh
+        playerctl next
