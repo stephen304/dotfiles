@@ -112,6 +112,10 @@ super + alt + shift + {Left,Down,Up,Right}
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
+# rotate
+super + r
+	bspc node -R 90
+
 #
 # Custom things
 #
