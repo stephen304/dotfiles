@@ -1,5 +1,6 @@
 !------------------------------------------------------------------------------
 ! c o l o r -  s e t t i n g s
+! Inspired by https://www.reddit.com/r/unixporn/comments/130bcv/slackwaredwm_my_last_linux_box/
 
 URxvt*foreground: #989892
 
